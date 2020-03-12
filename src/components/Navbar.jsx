@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import DarkMode from "../hooks/DarkMode";
+import {useLocalStorage} from "../hooks/useLocalStorage"
+import {useDarkMode} from "../hooks/useDarkMode"
 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useDarkMode("darkmode-storage",false);
 
   const toggleMode = e => {
     e.preventDefault();
     setDarkMode(!darkMode);
-    console.log("dark mode", darkMode)
   };
   return (
     <nav className="navbar">
       <h1>Crypto Tracker</h1>
-      <div className="dark-mode__toggle">
+      <div className="dark-mode__toggle" onClick={toggleMode}>
         <div
-          onClick={toggleMode}
           className={darkMode ? 'toggle toggled' : 'toggle'}
         />
       </div>
